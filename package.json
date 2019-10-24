@@ -1,0 +1,23 @@
+{
+  "name": "weatherforecastapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apoorvachikara/WeatherForeCastApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/apoorvachikara/WeatherForeCastApp/issues"
+  },
+  "homepage": "https://github.com/apoorvachikara/WeatherForeCastApp#readme",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "request": "^2.88.0"
+  }
+}
