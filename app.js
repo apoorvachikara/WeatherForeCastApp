@@ -12,14 +12,30 @@ request({url: URL, json: true}, (error, response) => {
         console.log('Unable to connect to weather API');   
         return;
     }
+    else if (response.body.error) {
+        log('Unable to find the Location');
+        return;
+    }
 
     const data = response.body.currently;
     log(chalk.blue(`It is currently ${data.temperature} degrees out. There is a ${data.precipProbability}% chance of rain`));
 })
 
 request({url : mapBoxAPi, json: true}, (error, response) => {
+
+    if(error) {
+        console.log(error);
+        return;
+    } else if (response.body.message) {
+        log(chalk.red(response.body.message));
+        return;
+    }
+    else if (response.body.features.length <= 0) {
+        log(chalk.red('No Results for this location'));
+        return;
+    }
     
     const longitude = response.body.features[0].center[0]
     const latitude = response.body.features[0].center[1];
-   log(`Latitude: ${response.body.features[0].center[0]} & Longitude: ${response.body.features[0].center[1]}`);
+    log(`Latitude: ${response.body.features[0].center[0]} & Longitude: ${response.body.features[0].center[1]}`);
 })
