@@ -1,19 +1,16 @@
 const express = require('express');
 const app = express();
+var handlebars  = require('express-handlebars');
 const path = require('path');
 const publicDirectory = path.join(__dirname, '../public');
-const log = console.log;
 
-
-log(__dirname)
-log(path.join(__dirname, '../public'));
-
-app.use(express.static(publicDirectory));6
+app.use(express.static(publicDirectory));
+app.set('views', path.join(__dirname, '../views'));
+app.set('view engine', 'hbs');
 
 app.get('/', (req, res) => {
-        res.send('<title>Title</title>');
-});
-
+    res.render('index');
+})
 app.get('/help', (req, res) => {
     // res.send('help.html');
 });
