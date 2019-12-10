@@ -3,9 +3,12 @@ const app = express();
 var handlebars  = require('hbs');
 const path = require('path');
 
+
 const publicDirectory = path.join(__dirname, '../public');
 const viewsPath = path.join(__dirname, '../templates');
 const partialPath = path.join(__dirname, '../templates/partials');
+
+
 
 app.use(express.static(publicDirectory));
 app.set('views', viewsPath);
@@ -15,13 +18,13 @@ handlebars.registerPartials(partialPath);
 app.get('/', (req, res) => {
     res.render('index', {
         'title': 'Weather App',
-        'name': 'Apoorva Chikara'
+        'name': 'Apoorva Chikara 1'
     });
 })
 app.get('/help', (req, res) => {
     res.render('help', {
         title: 'Help',
-        name: 'Apoorva Chikara',
+        name: 'Apoorva Chikara 2',
         message: 'I am on Help Page'
     });
 });
@@ -34,10 +37,23 @@ app.get('/about', (req, res) => {
     });
 });
 
-
 app.get('/weather', (req, res) => {
     res.send('Weather page');
 });
+
+app.get('/help/*', (req, res) => {
+    res.render('./layouts/error' ,{
+        PageName: 'Help Article not Found'
+    });
+})
+
+app.get('*', (req, res) => {
+        res.render( './layouts/error' , {
+            PageName: 'Page not Found'
+        });
+})
+
+
 
 app.listen(3000, () => {
     
