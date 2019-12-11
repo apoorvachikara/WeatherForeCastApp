@@ -1,14 +1,25 @@
 const express = require('express');
 const app = express();
+const { exec: runCommand } = require('child_process');
 var handlebars  = require('hbs');
 const path = require('path');
+var checkObjectEmpty = require('../util/checkObjectEmpty');
 
 
 const publicDirectory = path.join(__dirname, '../public');
 const viewsPath = path.join(__dirname, '../templates');
 const partialPath = path.join(__dirname, '../templates/partials');
 
-
+runCommand('node ../../app.js newyork', (err, stdout, stderr) => {
+    if (err) {
+      //some err occurred
+      console.error(err)
+    } else {
+     // the *entire* stdout and stderr (buffered)
+     console.log(`stdout: ${stdout}`);
+     console.log(`stderr: ${stderr}`);
+    }
+  });
 
 app.use(express.static(publicDirectory));
 app.set('views', viewsPath);
@@ -32,24 +43,45 @@ app.get('/help', (req, res) => {
 
 app.get('/about', (req, res) => {
     res.render('about', {
-        'title': 'About',
-        'name': 'Apoorva Chikara'
+        title: 'About',
+        name: 'Apoorva Chikara'
     });
 });
 
 app.get('/weather', (req, res) => {
-    res.send('Weather page');
+    if(checkObjectEmpty(req.query)) {
+        return res.send({
+            error: 'You must provide search term'
+        });
+    }
+    res.send({
+        message: 'Weather page',
+        address: req.query
+    });
 });
+
+app.get('/products', (req, res) => {
+    if(checkObjectEmpty(req.query)) {
+        return res.send({
+            error: 'You must provide search term'
+        })
+    }
+    res.send({
+        products: params
+    })
+})
 
 app.get('/help/*', (req, res) => {
     res.render('./layouts/error' ,{
-        PageName: 'Help Article not Found'
+        PageName: 'Help Article not Found',
+        name: 'Apoorva Chikara'
     });
 })
 
 app.get('*', (req, res) => {
         res.render( './layouts/error' , {
-            PageName: 'Page not Found'
+            PageName: 'Page not Found',
+            name: 'Apoorva Chikara'
         });
 })
 

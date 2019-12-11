@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href='/css/style.css'>
+        <script src='/js/test.js'></script>
         <title>Error Page</title>
     </head>
 
     <body>
-        {{>error}}
+        <div class="main-content">
+            {{>header}}
+            {{>error}}
+        </div>
+        {{>footer}}
     </body>
 </html>
 

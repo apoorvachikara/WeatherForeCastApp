@@ -2,13 +2,17 @@
 <html>
     <head>
             <link rel="stylesheet" href='/css/style.css'>
+            <link rel="icon" href="/images/weather.png">
             <script src='/js/test.js'></script>
     </head>       
         <title>{{title}}</title>
         <body>
-            {{>header}}
-            <h1>{{name}} </h1>
-            <p class='message'>{{message}}</p>
+            
+            <div class="main-content">
+                {{>header}}
+                <p>{{name}} </p>
+                <p class='message'>{{message}}</p>
+            </div>
             {{> footer}}
         </body>
     </head>
