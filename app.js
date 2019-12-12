@@ -12,7 +12,7 @@ if (!geoCodeLocation) {
 }
 
 //Get lat and long 
-geocode(geoCodeLocation, (error, {latitude, longitude, place}) => {
+module.exports =  geocode(geoCodeLocation, (error, {latitude, longitude, place}) => {
         if (error) {
             log(error);
             return;
