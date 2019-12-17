@@ -13,7 +13,7 @@ const forecast = (lat, long, cb) => {
         }
     
         const currentWeather = data.currently;
-        cb(undefined, `It is currently ${currentWeather.temperature} degrees out. There is a ${currentWeather.precipProbability}% chance of rain`);
+        cb(undefined, `It is currently ${currentWeather.temperature} degrees out. There is a ${currentWeather.precipProbability}% chance of rain`, currentWeather);
     })
 }
 

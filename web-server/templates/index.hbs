@@ -2,16 +2,23 @@
 <html>
     <head>
             <link rel="stylesheet" href='/css/style.css'>
-            <link rel="icon" href="/images/weather.png"
-            <script src='/js/test.js'></script>
+            <link rel="icon" href="/images/weather.png">
+            
     </head>       
         <title>{{title}}</title>
         <body>
             <div class='main-content'>
                 {{>header}}
                 <p>{{name}}</p>
+           <form>
+               <input type="text" placeholder="Please enter the place"/>
+               <button>Search</button>
+           </form>
             </div>
+           <p id="message-1"></p>
+           <p id="message-2"></p>
             {{> footer}}
+            <script src='/js/app.js'></script>
         </body>
     </head>
 </html>

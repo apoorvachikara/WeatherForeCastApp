@@ -51,30 +51,35 @@ app.get('/about', (req, res) => {
 
 app.get('/weather', (req, res) => {
 
-
-    if(checkObjectEmpty(req.query)) {
+debugger;
+    if(!req.query.address) {
         return res.send({
             error: 'You must provide search term'
         });
     }
-    
-    geocode(req.query.address, (error, {latitude, longitude, place}) => {
-                if(error) {
-                    res.send({
-                        message: error
-                    })
-                 }
-                 forecast(latitude, longitude, (error, foreCastData) => {
-                    if (error) {
+    else{
+
+        geocode(req.query.address, (error, {latitude, longitude, place} = {}) => {
+                    if(error) {
                         res.send({
                             message: error
                         })
-                    }
-                    res.send({
-                        foreCastData: foreCastData
+                        return;
+                     }
+                     forecast(latitude, longitude, (error, foreCastData, currentWeather) => {
+                        if (error) {
+                            res.send({
+                                message: error
+                            })
+                        }
+                        res.send({
+                            foreCastData: foreCastData,
+                            currentWeather: currentWeather
+                        })
                     })
-                })
-    })
+        })
+    }
+    
 
 });
 
